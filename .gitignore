@@ -3,3 +3,5 @@ __pycache__/
 wandb/
 *.h5ad
 result/
+/toy_images/
+/data/simulation/data_toy_images.pkl

@@ -5,7 +5,7 @@ import torch.nn as nn
 from torch.utils.data import DataLoader, Subset
 from torch.utils.data.sampler import Sampler
 
-from dataset import SCDataset, SimuDataset
+from src.dataset import SCDataset, SimuDataset
 
 
 ## MMD LOSS

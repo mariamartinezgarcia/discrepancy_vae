@@ -59,7 +59,7 @@ class SCDataset(Dataset):
 
 # read simulation dataset
 class SimuDataset(Dataset):
-    def __init__(self, datafile='/home/jzhang/discrepancy_vae/identifiable_causal_vae/data/simulation/data_1.pkl', perturb_type='single', perturb_targets=None):
+    def __init__(self, datafile='./data/simulation/data_toy_images.pkl', perturb_type='single', perturb_targets=None):
         super(Dataset, self).__init__()
         assert perturb_type in ['single', 'double'], 'perturb_type not supported!'
 
@@ -80,8 +80,76 @@ class SimuDataset(Dataset):
         self.ptb_ids = map_ptb_features(ptb_targets, ptb_data['ptbs'])
         del ptb_data 
 
-        self.nonlinear = dataset['nonlinear']
+        #self.nonlinear = dataset['nonlinear']
+        self.nonlinear = False
+        
         del dataset
+
+    def __getitem__(self, item):
+        x = torch.from_numpy(self.ctrl_samples[item].flatten()).double()
+        y = torch.from_numpy(self.ptb_samples[item].flatten()).double()
+        c = torch.from_numpy(self.ptb_ids[item]).double()
+        return x, y, c
+    
+    def __len__(self):
+        return self.ptb_samples.shape[0]
+    
+# read simulation dataset
+class SimuImageDataset(Dataset):
+    def __init__(self, datafile='./data/simulation/data_toy_images.pkl', perturb_type='single', perturb_targets=None):
+        super(Dataset, self).__init__()
+        assert perturb_type in ['single', 'double'], 'perturb_type not supported!'
+
+        with open(datafile, 'rb') as f:
+            dataset = pickle.load(f)
+
+        if perturb_targets is None:
+            ptb_targets = dataset['ptb_targets']
+        else:
+            ptb_targets = perturb_targets
+        self.ptb_targets = ptb_targets
+
+        
+        ptb_data = dataset[perturb_type]
+        self.ctrl_samples = ptb_data['X']
+        self.ptb_samples = ptb_data['Xc']
+        self.ptb_names = np.array(ptb_data['ptbs'])
+        self.ptb_ids = map_ptb_features(ptb_targets, ptb_data['ptbs'])
+        
+        del ptb_data 
+        del dataset
+
+    def __getitem__(self, item):
+        x = torch.from_numpy(self.ctrl_samples[item].flatten()).double()
+        y = torch.from_numpy(self.ptb_samples[item].flatten()).double()
+        c = torch.from_numpy(self.ptb_ids[item]).double()
+        return x, y, c
+    
+    def __len__(self):
+        return self.ptb_samples.shape[0]
+    
+# read toy image dataset
+class ToyImageDataset(Dataset):
+    def __init__(self, datafile='./data/simulation/data_toy_images.pkl', perturb_type='single', perturb_targets=None):
+        super(Dataset, self).__init__()
+        assert perturb_type in ['single', 'double'], 'perturb_type not supported!'
+
+        with open(datafile, 'rb') as f:
+            dataset = pickle.load(f)
+
+        if perturb_targets is None:
+            ptb_targets = dataset['ptb_targets']
+        else:
+            ptb_targets = perturb_targets
+        self.ptb_targets = ptb_targets
+
+        
+        ptb_data = dataset[perturb_type]
+        self.ctrl_samples = ptb_data['X']
+        self.ptb_samples = ptb_data['Xc']
+        self.ptb_names = np.array(ptb_data['ptbs'])
+        self.ptb_ids = map_ptb_features(ptb_targets, ptb_data['ptbs'])
+        del ptb_data 
 
     def __getitem__(self, item):
         x = torch.from_numpy(self.ctrl_samples[item].flatten()).double()

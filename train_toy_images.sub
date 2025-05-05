@@ -1,0 +1,23 @@
+universe = docker 
+docker_image =  pytorch/pytorch
+getenv = true
+
+should_transfer_files   = YES
+when_to_transfer_output = ON_EXIT
+transfer_input_files = execute.sh 
+
+requirements = ((UidDomain == "cs.uni-saarland.de") &&  (GPUs_GlobalMemoryMb >= 8000))
++WantGPUHomeMounted = true
+
+request_GPUs = 1
+request_CPUs = 4
+request_memory = 8G
+executable = execute.sh
+
+output = logs_cluster/$(Clusterid).$(ProcId).out
+error  = logs_cluster/$(Clusterid).$(ProcId).err
+log    = logs_cluster/$(Clusterid).$(ProcId).log
+
+arguments = train_model.py
+
+queue

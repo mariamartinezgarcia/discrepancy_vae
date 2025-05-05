@@ -6,8 +6,8 @@ from copy import deepcopy
 import numpy as np
 import os
 
-from model import CMVAE, CVAE, MVAE, CMVAE_simu
-from utils import MMD_loss
+from src.model import CMVAE, CVAE, MVAE, CMVAE_simu
+from src.utils import MMD_loss
 
 
 # fit CMVAE to data
@@ -22,8 +22,8 @@ def train(
     nonlinear=False,
     ):
 
-    if log:
-        wandb.init(project='cmvae', name=savedir.split('/')[-1])  
+    #if log:
+        #wandb.init(project='cmvae', name=savedir.split('/')[-1])  
 
     if simu:
         cmvae = CMVAE_simu(
