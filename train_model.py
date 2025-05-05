@@ -54,10 +54,10 @@ if opts.latdim is None:
 	opts.latdim = cdim
 opts.cdim = cdim
 
-train(dataloader, opts, device, '../result/', log=True, simu=True, nonlinear=nonlinear, order=[0,1,2,3])
+train(dataloader, opts, device, './result/', log=True, simu=True, nonlinear=nonlinear, order=[0,1,2,3])
 
 # Evalution
-savedir = '../result/' 
+savedir = './result/' 
 
 model = torch.load(f'{savedir}/best_model.pt')
 
