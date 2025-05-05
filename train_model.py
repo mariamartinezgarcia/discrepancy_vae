@@ -10,7 +10,7 @@ from src.utils import get_simu_data
 
 import wandb
 
-wb = False
+wb = True
 
 opts = Namespace(
 	batch_size = 256,
@@ -54,7 +54,7 @@ if opts.latdim is None:
 	opts.latdim = cdim
 opts.cdim = cdim
 
-train(dataloader, opts, device, '../result/', log=False, simu=True, nonlinear=nonlinear, order=[0,1,2,3])
+train(dataloader, opts, device, '../result/', log=True, simu=True, nonlinear=nonlinear, order=[0,1,2,3])
 
 # Evalution
 savedir = '../result/' 
