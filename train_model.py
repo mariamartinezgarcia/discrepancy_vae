@@ -33,6 +33,8 @@ opts = Namespace(
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
+print(device)
+
 torch.manual_seed(opts.seed)
 np.random.seed(opts.seed)
 random.seed(opts.seed)
