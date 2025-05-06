@@ -14,4 +14,4 @@ export HOME="$(pwd)"
 export PYTHONPATH='/home/martinez-garcia/discrepancy_vae/'
 export WANDB_API_KEY="740950e76ec925e646d291f15ceb318879365c62"
 
-/home/martinez-garcia/micromamba/envs/discrepancy_vae/bin/python "$@"
+/home/martinez-garcia/miniconda3/envs/discrepancy_vae/bin/python "$@"
