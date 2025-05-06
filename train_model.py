@@ -75,4 +75,4 @@ for i in range(5):
 
 print(order)
 
-torch.triu(model.G, diagonal=1)
+print(torch.triu(model.G, diagonal=1))
