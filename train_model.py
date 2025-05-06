@@ -65,8 +65,8 @@ model = torch.load(f'{savedir}/best_model.pt', weights_only=False)
 
 model.eval()
 order = []
-c_set = np.eye(5)
-for i in range(5):
+c_set = np.eye(4)
+for i in range(4):
     c = c_set[i,:]
     c = torch.from_numpy(c).to(device).double().unsqueeze(0)
 
