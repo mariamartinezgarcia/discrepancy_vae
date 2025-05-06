@@ -61,7 +61,7 @@ train(dataloader, opts, device, './result/', log=True, simu=True, nonlinear=nonl
 # Evalution
 savedir = './result/' 
 
-model = torch.load(f'{savedir}/best_model.pt')
+model = torch.load(f'{savedir}/best_model.pt', weights_only=False)
 
 model.eval()
 order = []
