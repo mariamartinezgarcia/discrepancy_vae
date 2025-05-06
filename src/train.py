@@ -41,6 +41,8 @@ def train(
             c_dim = opts.cdim,
             device = device
         )
+
+    print('Using device:', device)
     cmvae.double()
     cmvae.to(device)
 
